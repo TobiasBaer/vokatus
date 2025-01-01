@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const VokatusApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class VokatusApp extends StatelessWidget {
+  const VokatusApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Vokatus',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,13 +31,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:
+          const VokatusHomePage(title: 'Vokatus - The Vocabular Learning Bear'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class VokatusHomePage extends StatefulWidget {
+  const VokatusHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -51,10 +52,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<VokatusHomePage> createState() => _VokatusHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _VokatusHomePageState extends State<VokatusHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
