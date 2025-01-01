@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vokatus/app_settings/settings.dart' as app_settings;
 import 'package:vokatus/progress/progress_indicators.dart';
 
 class IrregularWordPage extends StatelessWidget {
