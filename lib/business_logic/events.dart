@@ -4,4 +4,4 @@ class RightAnswerEvent extends VocTrainerEvents {}
 
 class WrongAnswerEvent extends VocTrainerEvents {}
 
-class SkipVocableEvent extends VocTrainerEvents {}
+class SkipAnswerEvent extends VocTrainerEvents {}

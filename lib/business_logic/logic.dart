@@ -20,7 +20,7 @@ class VocabularyQueryBusinessLogic
       emit(ProgressState(0, [0.7, 0.2, 0.3, 0.4]));
     });
 
-    on<SkipVocableEvent>((event, emit) {
+    on<SkipAnswerEvent>((event, emit) {
       print("BLOC - Skip Event");
       emit(ProgressState(0, [0.9, 0.9, 0.9, 0.4]));
     });

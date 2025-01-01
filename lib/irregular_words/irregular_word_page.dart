@@ -21,7 +21,7 @@ class VocabularQueryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text('word'),
+      Text(word),
       Row(children: [
         ElevatedButton(
           onPressed: onRight,
@@ -73,7 +73,7 @@ class _IrregularWordPageState extends State<IrregularWordPage> {
                   word: "kaufen",
                   onRight: () => _businessLogic.add(RightAnswerEvent()),
                   onWrong: () => _businessLogic.add(WrongAnswerEvent()),
-                  onSkip: () => _businessLogic.add(SkipVocableEvent())),
+                  onSkip: () => _businessLogic.add(SkipAnswerEvent())),
               BlocBuilder<VocabularyQueryBusinessLogic, ProgressState>(
                   bloc: _businessLogic,
                   builder: (context, state) => ProgressIndicators(
