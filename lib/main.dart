@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vokatus/irregular_words/irregular_word_page.dart';
 
 void main() {
   runApp(const VokatusApp());
@@ -21,50 +22,18 @@ class VokatusApp extends StatelessWidget {
   }
 }
 
-class VokatusHomePage extends StatefulWidget {
+class VokatusHomePage extends StatelessWidget {
   const VokatusHomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<VokatusHomePage> createState() => _VokatusHomePageState();
-}
-
-class _VokatusHomePageState extends State<VokatusHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(title),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+        body: IrregularWordPage());
   }
 }
