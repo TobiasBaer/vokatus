@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vokatus/irregular_verbs/irregular_word_page.dart';
+import 'package:vokatus/irregular_verbs/irregular_verbs_page.dart';
 
 void main() {
   runApp(const VokatusApp());
@@ -34,6 +34,6 @@ class VokatusHomePage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(title),
         ),
-        body: IrregularWordPage());
+        body: IrregularVerbsPage());
   }
 }

@@ -40,14 +40,14 @@ class VocabularQueryPage extends StatelessWidget {
   }
 }
 
-class IrregularWordPage extends StatefulWidget {
-  const IrregularWordPage({super.key});
+class IrregularVerbsPage extends StatefulWidget {
+  const IrregularVerbsPage({super.key});
 
   @override
-  State<IrregularWordPage> createState() => _IrregularWordPageState();
+  State<IrregularVerbsPage> createState() => _IrregularVerbsPageState();
 }
 
-class _IrregularWordPageState extends State<IrregularWordPage> {
+class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
   late VocabularyQueryBusinessLogic _businessLogic;
 
   @override
