@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vokatus/irregular_words/irregular_word_page.dart';
+import 'package:vokatus/irregular_verbs/irregular_word_page.dart';
 
 void main() {
   runApp(const VokatusApp());
