@@ -222,7 +222,12 @@ class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
           WidgetBuilder builder;
           switch (settings.name) {
             case 'make_vokatus_happy':
-              builder = (BuildContext context) => const MakeVokatusHappy();
+              builder = (BuildContext context) => MakeVokatusHappy(
+                    onHappy: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed('irregular_vocabulary_query');
+                    },
+                  );
               break;
             case 'irregular_vocabulary_query':
               builder = (BuildContext context) =>
@@ -240,16 +245,14 @@ class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
 }
 
 class MakeVokatusHappy extends StatelessWidget {
-  const MakeVokatusHappy({super.key});
+  const MakeVokatusHappy({super.key, required this.onHappy});
+
+  final VoidCallback onHappy;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          Navigator.of(context)
-              .pushReplacementNamed('irregular_vocabulary_query');
-        },
-        child: const Text('Make Vokatus Happy'));
+        onPressed: onHappy, child: const Text('Make Vokatus Happy'));
   }
 }
 
