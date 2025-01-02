@@ -10,6 +10,7 @@ class VocabularyQueryBusinessLogic
   final Buckets _buckets = Buckets(app_settings.numBuckets,
       List<int>.generate(irregularVerbs.length, (index) => index));
 
+  // @TODO: Shuffle this
   VocabularyQueryBusinessLogic()
       : super(ProgressState(
             0,
