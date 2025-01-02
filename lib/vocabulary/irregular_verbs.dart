@@ -32,4 +32,14 @@ List<IrregularVerb> irregularVerbs = [
       infinitive: "to teach",
       simplePast: "taught",
       pastParticiple: "taught"),
+  IrregularVerb(
+      german: "aufstellen",
+      infinitive: "to put",
+      simplePast: "put",
+      pastParticiple: "put"),
+  IrregularVerb(
+      german: "essen",
+      infinitive: "to eat",
+      simplePast: "ate",
+      pastParticiple: "eaten"),
 ];
