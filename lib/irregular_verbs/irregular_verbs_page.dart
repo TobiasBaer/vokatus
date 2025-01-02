@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:vokatus/business_logic/events.dart';
 import 'package:vokatus/business_logic/logic.dart';
 import 'package:vokatus/business_logic/states.dart';
+import 'package:vokatus/irregular_verbs/choose_one_out_of_three.dart';
 import 'package:vokatus/progress/progress_indicators.dart';
 import 'package:vokatus/vocabulary/irregular_verbs.dart';
-import 'package:vokatus/irregular_verbs/choose_one_out_of_three.dart';
 
 class IrregularVocTrainerQuery extends StatefulWidget {
   const IrregularVocTrainerQuery(
