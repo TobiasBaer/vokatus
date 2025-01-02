@@ -10,7 +10,6 @@ class ProgressIndicators extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
     assert(currentBucket < app_settings.numBuckets);
     assert(bucketProgress.length == app_settings.numBuckets);
 
@@ -21,7 +20,9 @@ class ProgressIndicators extends StatelessWidget {
           child: LinearProgressIndicator(
             value: bucketProgress[i],
             backgroundColor: Colors.grey[300],
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+            valueColor: currentBucket == i
+                ? AlwaysStoppedAnimation<Color>(Colors.deepPurple)
+                : AlwaysStoppedAnimation<Color>(Colors.deepPurple[100]!),
           ),
         ),
     ]);
