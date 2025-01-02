@@ -55,6 +55,12 @@ class _ChooseOneOutOfThree extends State<ChooseOneOutOfThree> {
   List<bool> isSelected = [false, false, false];
 
   @override
+  void didUpdateWidget(covariant ChooseOneOutOfThree oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    isSelected = [false, false, false];
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ToggleButtons(
         isSelected: isSelected,
@@ -67,10 +73,8 @@ class _ChooseOneOutOfThree extends State<ChooseOneOutOfThree> {
 
           if (widget.choices[index] == widget.correctWord) {
             widget.onRight?.call();
-            print("Choose on out of tree - Correct!");
           } else {
             widget.onWrong?.call();
-            print("Choose on out of tree - Wrong!");
           }
         },
         direction: Axis.vertical,

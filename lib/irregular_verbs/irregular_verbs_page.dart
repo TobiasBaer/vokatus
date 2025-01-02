@@ -82,8 +82,19 @@ class _IrregularVocTrainerQueryState extends State<IrregularVocTrainerQuery> {
     reportResult();
   }
 
+  void reset() {
+    infinitivePressed = false;
+    simplePastPressed = false;
+    pastParticiplePressed = false;
+
+    infinitiveCorrect = false;
+    simplePastCorrect = false;
+    pastParticipleCorrect = false;
+  }
+
   @override
   Widget build(BuildContext context) {
+    reset();
     final theme = Theme.of(context);
 
     return Column(children: [
