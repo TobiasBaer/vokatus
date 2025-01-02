@@ -46,10 +46,8 @@ class _IrregularVocTrainerQueryState extends State<IrregularVocTrainerQuery> {
     if (allPressed()) {
       if (allCorrect()) {
         widget.onRight!();
-        print("Right");
       } else {
         widget.onWrong!();
-        print("Wrong");
       }
     }
   }

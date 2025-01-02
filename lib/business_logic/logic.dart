@@ -34,6 +34,8 @@ class VocabularyQueryBusinessLogic
       var currentBucket = _buckets.getCurrentBucket();
       var currentWordIndex = _buckets.getCurrentWordIndex();
 
+      print("WRONG - WRONG - WRONG - WRONG - WRONG - WRONG - WRONG - WRONG");
+
       emit(ProgressState(currentBucket, progress, currentWordIndex));
     });
 
