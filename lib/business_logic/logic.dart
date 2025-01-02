@@ -16,14 +16,16 @@ class VocabularyQueryBusinessLogic
             0,
             List<double>.generate(
                 app_settings.numBuckets, (index) => index == 0 ? 1.0 : 0.0),
-            0)) {
+            0,
+            false)) {
     on<RightAnswerEvent>((event, emit) {
       _buckets.processRightAnswer();
       _buckets.drawNext();
       var progress = _buckets.getBucketProgress();
       var currentBucket = _buckets.getCurrentBucket();
       var currentWordIndex = _buckets.getCurrentWordIndex();
-      emit(ProgressState(currentBucket, progress, currentWordIndex));
+      emit(ProgressState(
+          currentBucket, progress, currentWordIndex, _buckets.allLearned()));
     });
 
     on<WrongAnswerEvent>((event, emit) {
@@ -34,9 +36,7 @@ class VocabularyQueryBusinessLogic
       var currentBucket = _buckets.getCurrentBucket();
       var currentWordIndex = _buckets.getCurrentWordIndex();
 
-      print("WRONG - WRONG - WRONG - WRONG - WRONG - WRONG - WRONG - WRONG");
-
-      emit(ProgressState(currentBucket, progress, currentWordIndex));
+      emit(ProgressState(currentBucket, progress, currentWordIndex, false));
     });
 
     on<SkipAnswerEvent>((event, emit) {
@@ -46,7 +46,7 @@ class VocabularyQueryBusinessLogic
       var currentBucket = _buckets.getCurrentBucket();
       var currentWordIndex = _buckets.getCurrentWordIndex();
 
-      emit(ProgressState(currentBucket, progress, currentWordIndex));
+      emit(ProgressState(currentBucket, progress, currentWordIndex, false));
     });
   }
 }

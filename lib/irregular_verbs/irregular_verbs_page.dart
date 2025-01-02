@@ -216,7 +216,53 @@ class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return IrregularVocabularQuery(businessLogic: _businessLogic);
+    return Navigator(
+        initialRoute: 'make_vokatus_happy',
+        onGenerateRoute: (RouteSettings settings) {
+          WidgetBuilder builder;
+          switch (settings.name) {
+            case 'make_vokatus_happy':
+              builder = (BuildContext context) => const MakeVokatusHappy();
+              break;
+            case 'irregular_vocabulary_query':
+              builder = (BuildContext context) =>
+                  IrregularVocabularQuery(businessLogic: _businessLogic);
+              break;
+            case 'congratulations':
+              builder = (BuildContext context) => const Congratulations();
+              break;
+            default:
+              throw Exception('Invalid route: ${settings.name}');
+          }
+          return MaterialPageRoute<void>(builder: builder, settings: settings);
+        });
+  }
+}
+
+class MakeVokatusHappy extends StatelessWidget {
+  const MakeVokatusHappy({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: () {
+          Navigator.of(context)
+              .pushReplacementNamed('irregular_vocabulary_query');
+        },
+        child: const Text('Make Vokatus Happy'));
+  }
+}
+
+class Congratulations extends StatelessWidget {
+  const Congratulations({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Congratulations!'));
   }
 }
 
@@ -239,7 +285,13 @@ class IrregularVocabularQuery extends StatelessWidget {
                   bloc: _businessLogic,
                   builder: (context, state) => IrregularVocTrainerQuery(
                       wordIndex: state.currentWordIndex,
-                      onRight: () => _businessLogic.add(RightAnswerEvent()),
+                      onRight: () {
+                        _businessLogic.add(RightAnswerEvent());
+                        if (state.allLearned == true) {
+                          Navigator.of(context)
+                              .pushReplacementNamed('congratulations');
+                        }
+                      },
                       onWrong: () => _businessLogic.add(WrongAnswerEvent()),
                       onSkip: () => _businessLogic.add(SkipAnswerEvent()))),
               BlocBuilder<VocabularyQueryBusinessLogic, ProgressState>(

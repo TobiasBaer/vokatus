@@ -1,1 +1,1 @@
-const int numBuckets = 4;
+const int numBuckets = 3;
