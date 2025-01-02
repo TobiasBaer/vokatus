@@ -216,6 +216,20 @@ class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
 
   @override
   Widget build(BuildContext context) {
+    return IrregularVocabularQuery(businessLogic: _businessLogic);
+  }
+}
+
+class IrregularVocabularQuery extends StatelessWidget {
+  const IrregularVocabularQuery({
+    super.key,
+    required VocabularyQueryBusinessLogic businessLogic,
+  }) : _businessLogic = businessLogic;
+
+  final VocabularyQueryBusinessLogic _businessLogic;
+
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider(
         create: (_) => VocabularyQueryBusinessLogic(),
         child: Center(
