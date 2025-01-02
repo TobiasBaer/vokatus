@@ -7,6 +7,7 @@ class Buckets {
     buckets = List<Bucket>.generate(_numBuckets,
         (index) => index == 0 ? List<int>.from(vocableIndices) : []);
     _initialVocableIndicesLength = vocableIndices.length;
+    drawNext();
   }
 
   final int _numBuckets;
@@ -93,5 +94,6 @@ class Buckets {
 
   void drawNext() {
     buckets[currentBucket].shuffle();
+    print("Shuffled: ${buckets[currentBucket]}");
   }
 }

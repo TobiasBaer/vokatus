@@ -4,16 +4,17 @@ import 'package:vokatus/business_logic/events.dart';
 import 'package:vokatus/business_logic/logic.dart';
 import 'package:vokatus/business_logic/states.dart';
 import 'package:vokatus/progress/progress_indicators.dart';
+import 'package:vokatus/vocabulary/irregular_verbs.dart';
 
 class VocabularQueryPage extends StatelessWidget {
   const VocabularQueryPage(
       {super.key,
-      required this.word,
+      required this.wordIndex,
       required this.onRight,
       required this.onWrong,
       required this.onSkip});
 
-  final String word;
+  final int wordIndex;
   final VoidCallback onRight;
   final VoidCallback onWrong;
   final VoidCallback onSkip;
@@ -21,7 +22,7 @@ class VocabularQueryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text(word),
+      Text(irregularVerbs[wordIndex].german),
       Row(children: [
         ElevatedButton(
           onPressed: onRight,
@@ -69,11 +70,13 @@ class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
         child: Center(
           child: Column(
             children: <Widget>[
-              VocabularQueryPage(
-                  word: "kaufen",
-                  onRight: () => _businessLogic.add(RightAnswerEvent()),
-                  onWrong: () => _businessLogic.add(WrongAnswerEvent()),
-                  onSkip: () => _businessLogic.add(SkipAnswerEvent())),
+              BlocBuilder<VocabularyQueryBusinessLogic, ProgressState>(
+                  bloc: _businessLogic,
+                  builder: (context, state) => VocabularQueryPage(
+                      wordIndex: state.currentWordIndex,
+                      onRight: () => _businessLogic.add(RightAnswerEvent()),
+                      onWrong: () => _businessLogic.add(WrongAnswerEvent()),
+                      onSkip: () => _businessLogic.add(SkipAnswerEvent()))),
               BlocBuilder<VocabularyQueryBusinessLogic, ProgressState>(
                   bloc: _businessLogic,
                   builder: (context, state) => ProgressIndicators(
