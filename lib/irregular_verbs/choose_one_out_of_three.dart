@@ -53,7 +53,6 @@ class ChooseOneOutOfThree extends StatefulWidget {
 
 class _ChooseOneOutOfThree extends State<ChooseOneOutOfThree> {
   List<bool> isSelected = [false, false, false];
-  bool isCorrect = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +65,7 @@ class _ChooseOneOutOfThree extends State<ChooseOneOutOfThree> {
             }
           });
 
-          isCorrect = widget.choices[index] == widget.correctWord;
-
-          if (isCorrect) {
+          if (widget.choices[index] == widget.correctWord) {
             widget.onRight?.call();
             print("Choose on out of tree - Correct!");
           } else {
