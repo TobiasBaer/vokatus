@@ -46,39 +46,47 @@ class _IrregularVocTrainerQueryState extends State<IrregularVocTrainerQuery> {
     if (allPressed()) {
       if (allCorrect()) {
         widget.onRight!();
+        print("Right");
       } else {
         widget.onWrong!();
+        print("Wrong");
       }
     }
   }
 
-  void onRightSimplePast() {
-    simplePastPressed = true;
+  void onRightInfinitive() {
+    infinitivePressed = true;
+    infinitiveCorrect = true;
     reportResult();
   }
 
-  void onRightInfinitive() {
-    infinitivePressed = true;
+  void onRightSimplePast() {
+    simplePastPressed = true;
+    simplePastCorrect = true;
     reportResult();
   }
 
   void onRightPastParticiple() {
     pastParticiplePressed = true;
+    pastParticipleCorrect = true;
     reportResult();
   }
 
   void onWrongSimplePast() {
     simplePastPressed = true;
+    simplePastCorrect = false;
     reportResult();
   }
 
   void onWrongInfinitive() {
     infinitivePressed = true;
+    infinitiveCorrect = false;
     reportResult();
   }
 
   void onWrongPastParticiple() {
     pastParticiplePressed = true;
+    pastParticipleCorrect = false;
     reportResult();
   }
 
@@ -93,8 +101,13 @@ class _IrregularVocTrainerQueryState extends State<IrregularVocTrainerQuery> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didUpdateWidget(covariant IrregularVocTrainerQuery oldWidget) {
+    super.didUpdateWidget(oldWidget);
     reset();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Column(children: [
