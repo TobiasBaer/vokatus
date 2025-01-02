@@ -34,6 +34,48 @@ class _IrregularVocTrainerQueryState extends State<IrregularVocTrainerQuery> {
   bool simplePastPressed = false;
   bool pastParticiplePressed = false;
 
+  void showOverlay(BuildContext context) {
+    var correctWord = irregularVerbs[widget.wordIndex];
+
+    OverlayEntry overlayEntry;
+    overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).size.height * 0.3,
+        left: MediaQuery.of(context).size.width * 0.2,
+        child: Material(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.6,
+            height: MediaQuery.of(context).size.height * 0.4,
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
+            child: Center(
+              child: Column(
+                children: [
+                  Text(correctWord.german),
+                  Text(
+                    correctWord.infinitive,
+                  ),
+                  Text(
+                    correctWord.simplePast,
+                  ),
+                  Text(
+                    correctWord.pastParticiple,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry);
+
+    // Remove overlay entry after a delay
+    Future.delayed(const Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
+  }
+
   bool allPressed() {
     return infinitivePressed && simplePastPressed && pastParticiplePressed;
   }
@@ -47,6 +89,7 @@ class _IrregularVocTrainerQueryState extends State<IrregularVocTrainerQuery> {
       if (allCorrect()) {
         widget.onRight!();
       } else {
+        showOverlay(context);
         widget.onWrong!();
       }
     }
