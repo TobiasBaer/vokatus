@@ -5,38 +5,124 @@ import 'package:vokatus/business_logic/logic.dart';
 import 'package:vokatus/business_logic/states.dart';
 import 'package:vokatus/progress/progress_indicators.dart';
 import 'package:vokatus/vocabulary/irregular_verbs.dart';
+import 'package:vokatus/irregular_verbs/choose_one_out_of_three.dart';
 
-class VocabularQueryPage extends StatelessWidget {
-  const VocabularQueryPage(
+class IrregularVocTrainerQuery extends StatefulWidget {
+  const IrregularVocTrainerQuery(
       {super.key,
       required this.wordIndex,
-      required this.onRight,
-      required this.onWrong,
-      required this.onSkip});
+      this.onRight,
+      this.onWrong,
+      this.onSkip});
 
   final int wordIndex;
-  final VoidCallback onRight;
-  final VoidCallback onWrong;
-  final VoidCallback onSkip;
+  final VoidCallback? onRight;
+  final VoidCallback? onWrong;
+  final VoidCallback? onSkip;
+
+  @override
+  State<IrregularVocTrainerQuery> createState() =>
+      _IrregularVocTrainerQueryState();
+}
+
+class _IrregularVocTrainerQueryState extends State<IrregularVocTrainerQuery> {
+  bool infinitiveCorrect = false;
+  bool simplePastCorrect = false;
+  bool pastParticipleCorrect = false;
+
+  bool infinitivePressed = false;
+  bool simplePastPressed = false;
+  bool pastParticiplePressed = false;
+
+  bool allPressed() {
+    return infinitivePressed && simplePastPressed && pastParticiplePressed;
+  }
+
+  bool allCorrect() {
+    return infinitiveCorrect && simplePastCorrect && pastParticipleCorrect;
+  }
+
+  void reportResult() {
+    if (allPressed()) {
+      if (allCorrect()) {
+        widget.onRight!();
+      } else {
+        widget.onWrong!();
+      }
+    }
+  }
+
+  void onRightSimplePast() {
+    simplePastPressed = true;
+    reportResult();
+  }
+
+  void onRightInfinitive() {
+    infinitivePressed = true;
+    reportResult();
+  }
+
+  void onRightPastParticiple() {
+    pastParticiplePressed = true;
+    reportResult();
+  }
+
+  void onWrongSimplePast() {
+    simplePastPressed = true;
+    reportResult();
+  }
+
+  void onWrongInfinitive() {
+    infinitivePressed = true;
+    reportResult();
+  }
+
+  void onWrongPastParticiple() {
+    pastParticiplePressed = true;
+    reportResult();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(children: [
-      Text(irregularVerbs[wordIndex].german),
-      Row(children: [
-        ElevatedButton(
-          onPressed: onRight,
-          child: Text("Right"),
+      Center(
+          child: Card(
+        color: theme.colorScheme.primary,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(irregularVerbs[widget.wordIndex].german),
         ),
-        ElevatedButton(
-          onPressed: onWrong,
-          child: Text("Wrong"),
-        ),
-        ElevatedButton(
-          onPressed: onSkip,
-          child: Text("Skip"),
-        )
-      ]),
+      )),
+      Row(
+        children: [
+          Padding(
+              padding: const EdgeInsets.all(30),
+              child: ChooseOneOutOfThree(
+                  type: "infinitive",
+                  onRight: onRightInfinitive,
+                  onWrong: onWrongInfinitive,
+                  onSkip: widget.onSkip,
+                  wordIndex: widget.wordIndex)),
+          Padding(
+              padding: const EdgeInsets.all(30),
+              child: ChooseOneOutOfThree(
+                  type: "simplePast",
+                  onRight: onRightSimplePast,
+                  onWrong: onWrongSimplePast,
+                  onSkip: widget.onSkip,
+                  wordIndex: widget.wordIndex)),
+          Padding(
+              padding: const EdgeInsets.all(30),
+              child: ChooseOneOutOfThree(
+                  type: "pastParticiple",
+                  onRight: onRightPastParticiple,
+                  onWrong: onWrongPastParticiple,
+                  onSkip: widget.onSkip,
+                  wordIndex: widget.wordIndex)),
+        ],
+      )
     ]);
   }
 }
@@ -72,7 +158,7 @@ class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
             children: <Widget>[
               BlocBuilder<VocabularyQueryBusinessLogic, ProgressState>(
                   bloc: _businessLogic,
-                  builder: (context, state) => VocabularQueryPage(
+                  builder: (context, state) => IrregularVocTrainerQuery(
                       wordIndex: state.currentWordIndex,
                       onRight: () => _businessLogic.add(RightAnswerEvent()),
                       onWrong: () => _businessLogic.add(WrongAnswerEvent()),

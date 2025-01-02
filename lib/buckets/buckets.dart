@@ -94,6 +94,5 @@ class Buckets {
 
   void drawNext() {
     buckets[currentBucket].shuffle();
-    print("Shuffled: ${buckets[currentBucket]}");
   }
 }
