@@ -24,7 +24,7 @@ class ProgressIndicators extends StatelessWidget {
                 ? AlwaysStoppedAnimation<Color>(Colors.deepPurple)
                 : AlwaysStoppedAnimation<Color>(Colors.deepPurple[100]!),
           ),
-        ),
+        )
     ]);
   }
 }

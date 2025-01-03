@@ -5,14 +5,17 @@ import 'package:vokatus/business_logic/logic.dart';
 import 'package:vokatus/business_logic/states.dart';
 import 'package:vokatus/irregular_verbs/irregular_voc_trainer_query.dart';
 import 'package:vokatus/progress/progress_indicators.dart';
+import 'package:easy_count_timer/easy_count_timer.dart';
 
 class IrregularVocabularQuery extends StatelessWidget {
-  const IrregularVocabularQuery({
-    super.key,
-    required VocabularyQueryBusinessLogic businessLogic,
-  }) : _businessLogic = businessLogic;
+  const IrregularVocabularQuery(
+      {super.key,
+      required VocabularyQueryBusinessLogic businessLogic,
+      required this.timerController})
+      : _businessLogic = businessLogic;
 
   final VocabularyQueryBusinessLogic _businessLogic;
+  final CountTimerController timerController;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +42,9 @@ class IrregularVocabularQuery extends StatelessWidget {
                   builder: (context, state) => ProgressIndicators(
                       currentBucket: state.currentBucket,
                       bucketProgress: state.bucketProgress)),
+              CountTimer(
+                  controller: timerController,
+                  format: CountTimerFormat.secondsOnly),
             ],
           ),
         ));

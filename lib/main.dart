@@ -32,7 +32,7 @@ class VokatusHomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(title),
+          title: Center(child: Text(title)),
         ),
         body: IrregularVerbsPage());
   }

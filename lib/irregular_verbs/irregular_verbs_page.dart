@@ -3,6 +3,7 @@ import 'package:vokatus/business_logic/logic.dart';
 import 'package:vokatus/irregular_verbs/congratulations.dart';
 import 'package:vokatus/irregular_verbs/irregular_vocabular_query.dart';
 import 'package:vokatus/irregular_verbs/make_vokatus_happy.dart';
+import 'package:easy_count_timer/easy_count_timer.dart';
 
 class IrregularVerbsPage extends StatefulWidget {
   const IrregularVerbsPage({super.key});
@@ -13,6 +14,7 @@ class IrregularVerbsPage extends StatefulWidget {
 
 class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
   late VocabularyQueryBusinessLogic _businessLogic;
+  var controller = CountTimerController();
 
   @override
   void initState() {
@@ -35,18 +37,21 @@ class _IrregularVerbsPageState extends State<IrregularVerbsPage> {
           switch (settings.name) {
             case 'make_vokatus_happy':
               builder = (BuildContext context) => MakeVokatusHappy(
-                    onHappy: () {
+                    onPressed: () {
                       Navigator.of(context)
                           .pushReplacementNamed('irregular_vocabulary_query');
+                      controller.restart();
                     },
                   );
               break;
             case 'irregular_vocabulary_query':
-              builder = (BuildContext context) =>
-                  IrregularVocabularQuery(businessLogic: _businessLogic);
+              builder = (BuildContext context) => IrregularVocabularQuery(
+                  businessLogic: _businessLogic, timerController: controller);
               break;
             case 'congratulations':
-              builder = (BuildContext context) => const Congratulations();
+              builder = (BuildContext context) =>
+                  Congratulations(time: controller.duration.toString());
+
               break;
             default:
               throw Exception('Invalid route: ${settings.name}');

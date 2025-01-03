@@ -12,6 +12,12 @@ class IrregularVerb {
 }
 
 List<IrregularVerb> irregularVerbs = [
+/*
+  IrregularVerb(
+      german: "sein",
+      infinitive: "to be",
+      simplePast: "was",
+      pastParticiple: "been"),
   IrregularVerb(
       german: "kaufen",
       infinitive: "to buy",
@@ -27,6 +33,7 @@ List<IrregularVerb> irregularVerbs = [
       infinitive: "to build",
       simplePast: "built",
       pastParticiple: "built"),
+      */
   IrregularVerb(
       german: "lehren",
       infinitive: "to teach",
